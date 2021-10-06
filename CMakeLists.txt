@@ -1,30 +1,21 @@
 cmake_minimum_required(VERSION 3.14)
 
-set (TARGET_NAME lv_lib_rlottie)
+### Espressif specific
+idf_component_register(
+    SRCS "lv_rlottie.c" "lv_rlottie_example_fingerprint.c"
+    INCLUDE_DIRS "." "rlottie_lib/rlottie/inc"
+    REQUIRES lvgl)
 
-add_library( ${TARGET_NAME} STATIC )
+option(LOTTIE_MODULE OFF)
+option(LOTTIE_THREAD OFF)
+option(BUILD_SHARED_LIBS OFF)
+function(install)
+endfunction()
 
-target_include_directories(
-    ${TARGET_NAME}
-    PUBLIC
-    ${CMAKE_CURRENT_LIST_DIR}
-)
+function(export)
+endfunction()
 
-target_include_directories(${TARGET_NAME}
-    PUBLIC
-    "${CMAKE_CURRENT_LIST_DIR}/rlottie_lib/rlottie/inc"
-    )
+add_subdirectory (rlottie_lib)
 
-add_subdirectory (lv_lib_rlottie/rlottie_lib)
-
-target_sources(
-    ${TARGET_NAME}
-    PRIVATE
-    "lv_lib_rlottie/lv_rlottie.c"
-)
-
-target_link_libraries(
-    ${TARGET_NAME}
-    PUBLIC
-    rlottie
-)
+# Link rlottie to main component
+target_link_libraries(${COMPONENT_LIB} PUBLIC rlottie)
