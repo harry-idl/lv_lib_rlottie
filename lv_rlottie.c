@@ -116,7 +116,7 @@ static void lv_rlottie_constructor(const lv_obj_class_t * class_p, lv_obj_t * ob
     }
 
     rlottie->imgdsc.header.always_zero = 0;
-    rlottie->imgdsc.header.cf = LV_IMG_CF_TRUE_COLOR_ALPHA;
+    rlottie->imgdsc.header.cf = LV_IMG_CF_TRUE_COLOR;
     rlottie->imgdsc.header.h = create_height;
     rlottie->imgdsc.header.w = create_width;
     rlottie->imgdsc.data = rlottie->allocated_buf;
